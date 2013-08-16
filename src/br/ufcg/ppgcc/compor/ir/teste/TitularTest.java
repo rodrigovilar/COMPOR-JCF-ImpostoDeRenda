@@ -22,5 +22,12 @@ public class TitularTest {
 		Titular titular = TitularHelper.criarTitularMinimo();
 		TitularHelper.verificaCriacaoTitular(fachada, titular);
 	}
+	
+	@Test
+	public void T_01_02_titularCompleto() {
+		Titular titular = TitularHelper.criarTitularPadrao();
+		TitularHelper.verificaCriacaoTitular(fachada, titular);
+	}
+
 
 }
