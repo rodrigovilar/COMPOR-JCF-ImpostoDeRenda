@@ -12,6 +12,8 @@ public class LogicaTitular {
 	public void criarNovoTitular(Titular titular) {
 		Validacao.obrigatorio(titular.getNome(),
 				"O campo nome é obrigatório para o titular");
+		Validacao.obrigatorio(titular.getCpf(),
+				"O campo CPF é obrigatório para o titular");
 		titulares.add(titular);
 	}
 
