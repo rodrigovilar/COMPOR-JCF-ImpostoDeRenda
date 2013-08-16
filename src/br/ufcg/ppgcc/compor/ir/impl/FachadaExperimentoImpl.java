@@ -11,7 +11,9 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 
 	@Override
 	protected void addComponents() {
-		add(new GerenteTitular());
+		GerenteTitular gerenteTitular = new GerenteTitular();
+		add(gerenteTitular);
+		add(new ValidacaoTitular(gerenteTitular));
 	}
 
 	public void criarNovoTitular(Titular titular) {
