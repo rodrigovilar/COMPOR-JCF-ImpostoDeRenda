@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
+import br.ufcg.ppgcc.compor.ir.impl.FachadaExperimentoImpl;
 
 
 public class TitularTest {
@@ -13,8 +14,7 @@ public class TitularTest {
 
 	@Before
 	public void iniciar() {
-		//Coloque sua Fachada aqui.
-		fachada = null;
+		fachada = new FachadaExperimentoImpl();
 	}
 
 	@Test
