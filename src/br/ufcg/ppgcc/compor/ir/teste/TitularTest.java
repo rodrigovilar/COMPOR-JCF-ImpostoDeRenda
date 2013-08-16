@@ -3,6 +3,7 @@ package br.ufcg.ppgcc.compor.ir.teste;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
@@ -34,6 +35,13 @@ public class TitularTest {
 		Titular titular1 = TitularHelper.criarTitularPadrao();
 		Titular titular2 = TitularHelper.criarTitularMinimo();
 		TitularHelper.verificaCriacaoTitulares(fachada, titular1, titular2);
+	}
+
+	@Test(expected=ExcecaoImpostoDeRenda.class)
+	public void T_01_04_titularSemNome() {
+		Titular titular = new Titular();
+		titular.setCpf("000.000.000-00"); 
+		fachada.criarNovoTitular(titular);
 	}
 
 }
