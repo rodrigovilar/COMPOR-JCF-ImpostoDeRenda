@@ -43,5 +43,12 @@ public class TitularTest {
 		titular.setCpf("000.000.000-00"); 
 		fachada.criarNovoTitular(titular);
 	}
+	
+	@Test(expected=ExcecaoImpostoDeRenda.class)
+	public void declaracaoSemCpf() {
+		Titular titular = new Titular();
+		titular.setNome("Jose");
+		fachada.criarNovoTitular(titular);
+	}
 
 }
