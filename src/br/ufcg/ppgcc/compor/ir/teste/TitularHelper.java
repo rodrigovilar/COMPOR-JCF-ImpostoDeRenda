@@ -5,7 +5,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.List;
 
+import org.junit.Assert;
+
 import br.ufcg.ppgcc.compor.ir.fachada.Endereco;
+import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
@@ -52,6 +55,15 @@ public class TitularHelper {
 			assertEquals(titulares[i], titularesSalvos.get(i));
 		}
 		
+	}
+
+	static void excecaoCriarTitular(FachadaExperimento fachada, Titular titular, String mensagem) {
+		try {
+			fachada.criarNovoTitular(titular);
+			Assert.fail("A criação de Titular deveria ter lançado exceção");
+		} catch (ExcecaoImpostoDeRenda e) {
+			Assert.assertEquals(e.getMessage(), mensagem);
+		}
 	}
 
 }
