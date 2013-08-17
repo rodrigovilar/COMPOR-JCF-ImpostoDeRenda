@@ -10,10 +10,9 @@ public class LogicaTitular {
 	private List<Titular> titulares = new ArrayList<Titular>();
 
 	public void criarNovoTitular(Titular titular) {
-		Validacao.obrigatorio(titular.getNome(),
-				"O campo nome é obrigatório para o titular");
-		Validacao.obrigatorio(titular.getCpf(),
-				"O campo CPF é obrigatório para o titular");
+		Validacao.obrigatorio(titular.getNome(), "O campo nome é obrigatório");
+		Validacao.obrigatorio(titular.getCpf(), "O campo CPF é obrigatório");
+		Validacao.cpf(titular.getCpf(), "O campo CPF está inválido");
 		titulares.add(titular);
 	}
 
