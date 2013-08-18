@@ -8,5 +8,8 @@ public interface FachadaExperimento {
 
 	List<Titular> listarTitulares();
 
+	void criarFontePagadora(Titular titular, FontePagadora fonte);
+
+	List<FontePagadora> listarFontes(Titular titular);
 
 }

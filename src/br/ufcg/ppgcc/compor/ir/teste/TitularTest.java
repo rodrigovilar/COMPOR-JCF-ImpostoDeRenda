@@ -3,7 +3,6 @@ package br.ufcg.ppgcc.compor.ir.teste;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 import br.ufcg.ppgcc.compor.ir.impl.FachadaExperimentoImpl;
