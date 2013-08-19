@@ -20,6 +20,7 @@ public class LogicaFontePagadora {
 				"O campo rendimentos recebidos é obrigatório");
 		Validacao.numeroMaiorQueZero(fonte.getRendimentosRecebidos(),
 				"O campo rendimentos recebidos deve ser maior que zero");
+		Validacao.cpfOuCnpj(fonte.getCpfCnpj(), "O campo CPF/CNPJ é inválido");
 
 		inicializaLista(titular);
 		fontes.get(titular).add(fonte);
