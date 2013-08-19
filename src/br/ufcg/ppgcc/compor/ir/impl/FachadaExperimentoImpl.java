@@ -8,9 +8,12 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class FachadaExperimentoImpl implements FachadaExperimento {
 	
-	private LogicaTitular logicaTitular = new LogicaTitular();
+	private LogicaTitular logicaTitular = LogicaTitular.getInstance();
 	private LogicaFontePagadora logicaFontePagadora = new LogicaFontePagadora();
 
+	public FachadaExperimentoImpl() {
+		logicaTitular.limpar();
+	}
 
 	public void criarNovoTitular(Titular titular) {
 		logicaTitular.criarNovoTitular(titular);
