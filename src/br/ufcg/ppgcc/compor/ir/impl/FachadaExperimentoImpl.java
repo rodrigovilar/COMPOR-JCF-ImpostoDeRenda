@@ -16,7 +16,9 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 		add(gerenteTitular);
 		add(new ValidacaoTitular(gerenteTitular));
 		
-		add(new GerenteFontePagadora());
+		GerenteFontePagadora gerenteFonte = new GerenteFontePagadora();
+		add(gerenteFonte);
+		add(new ValidacaoFontePagadora(gerenteFonte));
 	}
 
 	public void criarNovoTitular(Titular titular) {

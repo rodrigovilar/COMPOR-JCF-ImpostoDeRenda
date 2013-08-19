@@ -18,4 +18,16 @@ public class Validacao {
 		}
 	}
 
+	public static void numeroDifetenteZero(double numero, String mensagem){
+		if (numero == 0.0) {
+			throw new ExcecaoImpostoDeRenda(mensagem);			
+		}
+	}
+
+	public static void numeroMaiorQueZero(double numero, String mensagem){
+		if (numero <= 0.0) {
+			throw new ExcecaoImpostoDeRenda(mensagem);			
+		}
+	}
+
 }
