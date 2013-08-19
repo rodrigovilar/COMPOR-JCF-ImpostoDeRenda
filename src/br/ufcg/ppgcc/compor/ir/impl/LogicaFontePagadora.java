@@ -8,24 +8,31 @@ import java.util.Map;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
-
 public class LogicaFontePagadora {
 
 	private Map<Titular, List<FontePagadora>> fontes = new HashMap<Titular, List<FontePagadora>>();
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
-		if (fontes.get(titular) == null) {
-			fontes.put(titular, new ArrayList<FontePagadora>());
-		}
+		Validacao.obrigatorio(fonte.getNome(), "O campo nome é obrigatório");
+		Validacao.obrigatorio(fonte.getCpfCnpj(),
+				"O campo CPF/CNPJ é obrigatório");
+		Validacao.numeroDiferenteZero(fonte.getRendimentosRecebidos(),
+				"O campo rendimentos recebidos é obrigatório");
+		Validacao.numeroMaiorQueZero(fonte.getRendimentosRecebidos(),
+				"O campo rendimentos recebidos deve ser maior que zero");
 
+		inicializaLista(titular);
 		fontes.get(titular).add(fonte);
 	}
 
-	public List<FontePagadora> getFontes(Titular titular) {
+	private void inicializaLista(Titular titular) {
 		if (fontes.get(titular) == null) {
 			fontes.put(titular, new ArrayList<FontePagadora>());
 		}
+	}
 
+	public List<FontePagadora> getFontes(Titular titular) {
+		inicializaLista(titular);
 		return fontes.get(titular);
 	}
 
