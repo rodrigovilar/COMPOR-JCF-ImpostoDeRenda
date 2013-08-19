@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.junit.Assert;
+
+import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
@@ -15,7 +18,7 @@ public class FontePagadoraHelper {
 		FontePagadora fonte = new FontePagadora();
 		fonte.setNome(nome);
 		fonte.setCpfCnpj(cpfCnpj);
-		fonte.setRendimentoRecebidos(rendimentoRecebidos);
+		fonte.setRendimentosRecebidos(rendimentoRecebidos);
 		return fonte;
 	}
 
@@ -39,6 +42,15 @@ public class FontePagadoraHelper {
 			assertEquals(fontes[i], fontesSalvas.get(i));
 		}
 		
+	}
+
+	static void excecaoCriarFonte(FachadaExperimento fachada, Titular titular, FontePagadora fonte, String mensagem) {
+		try {
+			fachada.criarFontePagadora(titular, fonte);
+			Assert.fail("A criação de Fonte pagadora deveria ter lançado exceção");
+		} catch (ExcecaoImpostoDeRenda e) {
+			Assert.assertEquals(e.getMessage(), mensagem);
+		}
 	}
 
 }
