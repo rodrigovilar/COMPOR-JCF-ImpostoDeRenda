@@ -12,4 +12,8 @@ public interface FachadaExperimento {
 
 	List<FontePagadora> listarFontes(Titular titular);
 
+	void criarDependente(Titular titular, Dependente dependente);
+
+	List<Dependente> listarDependentes(Titular titular);
+
 }
