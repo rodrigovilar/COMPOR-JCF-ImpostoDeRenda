@@ -56,18 +56,40 @@ public class FontePagadoraTest {
 		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonteSemNome,
 				"O campo nome é obrigatório");
 
-		FontePagadora fonteSemCPFCNPJ = FontePagadoraHelper.criarFontePagadora("UFCG", null, 50000);
-		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonteSemCPFCNPJ,
-				"O campo CPF/CNPJ é obrigatório");
+		FontePagadora fonteSemCPFCNPJ = FontePagadoraHelper.criarFontePagadora(
+				"UFCG", null, 50000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular,
+				fonteSemCPFCNPJ, "O campo CPF/CNPJ é obrigatório");
 
-		FontePagadora fonteSemRendimentos = FontePagadoraHelper.criarFontePagadora("UFCG", "000.000.000/0000-00",
-				0);
-		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonteSemRendimentos,
+		FontePagadora fonteSemRendimentos = FontePagadoraHelper
+				.criarFontePagadora("UFCG", "000.000.000/0000-00", 0);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular,
+				fonteSemRendimentos,
 				"O campo rendimentos recebidos é obrigatório");
 
-		FontePagadora fonteComRendimentosNegativos = FontePagadoraHelper.criarFontePagadora("UFCG", "00.000.000/0000-00",
-				-1000);
-		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonteComRendimentosNegativos,
+		FontePagadora fonteComRendimentosNegativos = FontePagadoraHelper
+				.criarFontePagadora("UFCG", "00.000.000/0000-00", -1000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular,
+				fonteComRendimentosNegativos,
 				"O campo rendimentos recebidos deve ser maior que zero");
 	}
+
+	@Test
+	public void T_02_05_novaFonteComCnpjInvalido() {
+		Titular titular = TitularHelper.criarTitularPadrao();
+		FontePagadora fonte = FontePagadoraHelper.criarFontePagadora("UFCG",
+				"0000000000000000", 50000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
+				"O campo CPF/CNPJ é inválido");
+
+		fonte = FontePagadoraHelper.criarFontePagadora("UFCG", "abcd", 50000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
+				"O campo CPF/CNPJ é inválido");
+
+		fonte = FontePagadoraHelper.criarFontePagadora("UFCG",
+				"00.000.000/0000-00a", 50000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
+				"O campo CPF/CNPJ é inválido");
+	}
+
 }
