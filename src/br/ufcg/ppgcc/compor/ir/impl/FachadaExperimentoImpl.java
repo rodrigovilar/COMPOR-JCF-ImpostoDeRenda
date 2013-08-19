@@ -3,6 +3,7 @@ package br.ufcg.ppgcc.compor.ir.impl;
 import java.util.List;
 
 import net.compor.frameworks.jcf.api.ComporFacade;
+import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
@@ -19,6 +20,8 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 		GerenteFontePagadora gerenteFonte = new GerenteFontePagadora();
 		add(gerenteFonte);
 		add(new ValidacaoFontePagadora(gerenteFonte));
+		
+		add(new GerenteDependente());
 	}
 
 	public void criarNovoTitular(Titular titular) {
@@ -37,6 +40,16 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 	@SuppressWarnings("unchecked")
 	public List<FontePagadora> listarFontes(Titular titular) {
 		return (List<FontePagadora>) requestService("listarFontesPagadoras",
+				titular);
+	}
+
+	public void criarDependente(Titular titular, Dependente dependente) {
+		requestService("criarDependente", titular, dependente);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Dependente> listarDependentes(Titular titular) {
+		return (List<Dependente>) requestService("listarDependentes",
 				titular);
 	}
 
