@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
@@ -22,16 +21,10 @@ public class LogicaFontePagadora {
 		Validacao.numeroMaiorQueZero(fonte.getRendimentosRecebidos(),
 				"O campo rendimentos recebidos deve ser maior que zero");
 		Validacao.cpfOuCnpj(fonte.getCpfCnpj(), "O campo CPF/CNPJ é inválido");
-		validar(titular);
+		ValidacaoTitular.validar(titular);
 
 		inicializaLista(titular);
 		fontes.get(titular).add(fonte);
-	}
-
-	private void validar(Titular titular) {
-		if(!LogicaTitular.getInstance().listarTitulares().contains(titular)) {
-			throw new ExcecaoImpostoDeRenda("Titular não cadastrado");
-		}
 	}
 
 	private void inicializaLista(Titular titular) {

@@ -13,6 +13,13 @@ public class LogicaDependente {
 	private Map<Titular, List<Dependente>> dependentes = new HashMap<Titular, List<Dependente>>();
 
 	public void criarDependente(Titular titular, Dependente dependente) {
+		Validacao.obrigatorio(dependente.getNome(), "O campo nome é obrigatório");
+		Validacao.obrigatorio(dependente.getCpf(), "O campo CPF é obrigatório");
+		Validacao.numeroDiferenteZero(dependente.getTipo(), "O campo tipo é obrigatório");
+		Validacao.numeroMaiorQueZero(dependente.getTipo(), "O campo tipo é inválido");
+		Validacao.cpf(dependente.getCpf(), "O campo CPF é inválido");
+		ValidacaoTitular.validar(titular);
+
 		inicializaLista(titular);
 		dependentes.get(titular).add(dependente);
 	}
