@@ -10,7 +10,19 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class LogicaFontePagadora {
 
+	private static LogicaFontePagadora instance;
+
 	private Map<Titular, List<FontePagadora>> fontes = new HashMap<Titular, List<FontePagadora>>();
+
+	public static LogicaFontePagadora getInstance() {
+		if (instance == null) {
+			instance = new LogicaFontePagadora();
+		}
+		return instance;
+	}
+	
+	private LogicaFontePagadora(){}
+	
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
 		Validacao.obrigatorio(fonte.getNome(), "O campo nome é obrigatório");
@@ -37,5 +49,16 @@ public class LogicaFontePagadora {
 		inicializaLista(titular);
 		return fontes.get(titular);
 	}
+
+	public double totalRecebido(Titular titular) {
+		List<FontePagadora> fontes = getFontes(titular);
+		double soma = 0.0;
+		
+		for (FontePagadora fontePagadora : fontes) {
+			soma += fontePagadora.getRendimentosRecebidos();
+		}
+		
+		return soma;
+	}	
 
 }
