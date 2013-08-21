@@ -29,7 +29,7 @@ public class DeclaracaoCompletaTest {
 		Titular titular2 = TitularHelper.criarTitularMinimo();
 		cadastrarCalcularImpostoDevido(0, titular2, 19000);
 
-		Titular titular3 = TitularHelper.criarTitularPadrao();
+		Titular titular3 = TitularHelper.criarTitularPadrao2();
 		cadastrarCalcularImpostoDevido(0, titular3, 5000, 10000);
 	}
 
@@ -55,7 +55,7 @@ public class DeclaracaoCompletaTest {
 		Titular titular2 = TitularHelper.criarTitularMinimo();
 		cadastrarCalcularImpostoDevido(401.6, titular2, 25000);
 
-		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Titular titular3 = TitularHelper.criarTitularPadrao2();
 		cadastrarCalcularImpostoDevido(701.6, titular3, 15000, 14000);
 	}
 
@@ -67,7 +67,7 @@ public class DeclaracaoCompletaTest {
 		Titular titular2 = TitularHelper.criarTitularMinimo();
 		cadastrarCalcularImpostoDevido(1568.45, titular2, 35000);
 
-		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Titular titular3 = TitularHelper.criarTitularPadrao2();
 		cadastrarCalcularImpostoDevido(2168.45, titular3, 15000, 24000);
 	}
 
@@ -79,7 +79,7 @@ public class DeclaracaoCompletaTest {
 		Titular titular2 = TitularHelper.criarTitularMinimo();
 		cadastrarCalcularImpostoDevido(3499.21, titular2, 45000);
 
-		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Titular titular3 = TitularHelper.criarTitularPadrao2();
 		cadastrarCalcularImpostoDevido(4399.21, titular3, 15000, 34000);
 	}
 
@@ -91,7 +91,7 @@ public class DeclaracaoCompletaTest {
 		Titular titular2 = TitularHelper.criarTitularMinimo();
 		cadastrarCalcularImpostoDevido(18421.62, titular2, 100000);
 
-		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Titular titular3 = TitularHelper.criarTitularPadrao2();
 		cadastrarCalcularImpostoDevido(265921.62, titular3, 300000, 500000,
 				200000);
 	}
