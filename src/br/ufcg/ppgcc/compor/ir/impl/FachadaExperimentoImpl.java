@@ -6,6 +6,7 @@ import net.compor.frameworks.jcf.api.ComporFacade;
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
+import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class FachadaExperimentoImpl extends ComporFacade implements
@@ -24,6 +25,8 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 		GerenteDependente gerenteDependente = new GerenteDependente();
 		add(gerenteDependente);
 		add(new ValidacaoDependente(gerenteDependente));
+		
+		add(new GerenteDeclaracaoCompleta());
 	}
 
 	public void criarNovoTitular(Titular titular) {
@@ -53,6 +56,11 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 	public List<Dependente> listarDependentes(Titular titular) {
 		return (List<Dependente>) requestService("listarDependentes",
 				titular);
+	}
+
+	@Override
+	public Resultado declaracaoCompleta(Titular titular) {
+		return (Resultado) requestService("declaracaoCompleta", titular);
 	}
 
 }

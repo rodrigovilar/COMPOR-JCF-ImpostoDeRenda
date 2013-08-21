@@ -36,4 +36,17 @@ public class GerenteFontePagadora extends Component {
 			fontesPagadoras.put(titular, new ArrayList<FontePagadora>());
 		}
 	}
+
+	@Service
+	public Double totalRecebido(Titular titular) {
+		List<FontePagadora> fontes = listarFontesPagadoras(titular);
+		double soma = 0.0;
+		
+		for (FontePagadora fontePagadora : fontes) {
+			soma += fontePagadora.getRendimentosRecebidos();
+		}
+		
+		return soma;
+	}	
+
 }
