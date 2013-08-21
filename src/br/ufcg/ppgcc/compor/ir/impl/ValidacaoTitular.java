@@ -17,4 +17,6 @@ public class ValidacaoTitular extends Decorator<GerenteTitular> {
 		Validacao.cpf(titular.getCpf(), "O campo CPF está inválido");
 		getInnerComponent().criarTitular(titular);
 	}
+	
+
 }

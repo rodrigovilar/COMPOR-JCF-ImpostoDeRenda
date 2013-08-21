@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.compor.frameworks.jcf.api.Component;
 import net.compor.frameworks.jcf.api.Service;
+import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class GerenteTitular extends Component {
@@ -23,4 +24,13 @@ public class GerenteTitular extends Component {
 	public List<Titular> listarTitulares() {
 		return titulares;
 	}
+	
+	@Service
+	public void validarTitular(Titular titular) {
+		List<Titular> titulares = listarTitulares();
+		if (!titulares.contains(titular)) {
+			throw new ExcecaoImpostoDeRenda("Titular não cadastrado");
+		}
+	}
+
 }

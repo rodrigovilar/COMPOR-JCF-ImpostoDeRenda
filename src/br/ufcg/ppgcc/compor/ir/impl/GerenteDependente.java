@@ -12,16 +12,13 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class GerenteDependente extends Component {
 
-	private Map<Titular, List<Dependente>> dependentes = 
-			new HashMap<Titular, List<Dependente>>();
+	private Map<Titular, List<Dependente>> dependentes = new HashMap<Titular, List<Dependente>>();
 
 	public GerenteDependente() {
 		super("Gerente de dependentes");
 	}
 
-	@Service
-	public void criarDependente(Titular titular,
-			Dependente dependente) {
+	public void criarDependente(Titular titular, Dependente dependente) {
 		inicializarLista(titular);
 		dependentes.get(titular).add(dependente);
 	}
@@ -31,7 +28,7 @@ public class GerenteDependente extends Component {
 		inicializarLista(titular);
 		return dependentes.get(titular);
 	}
-	
+
 	private void inicializarLista(Titular titular) {
 		if (dependentes.get(titular) == null) {
 			dependentes.put(titular, new ArrayList<Dependente>());

@@ -25,7 +25,7 @@ public class Component extends FunctionalComponent {
 			ServiceResponse response = super.doIt(request);
 	
 			if (response.hasException()) {
-				throw new RuntimeException(response.getException());
+				throw new RuntimeException(response.getException().getMessage());
 			} else {
 				return response.getData();
 			}

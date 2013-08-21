@@ -32,7 +32,7 @@ public class Validacao {
 	}
 
 
-	public static void numeroDifetenteZero(double numero, String mensagem){
+	public static void numeroDiferenteZero(double numero, String mensagem){
 		if (numero == 0.0) {
 			throw new ExcecaoImpostoDeRenda(mensagem);			
 		}
