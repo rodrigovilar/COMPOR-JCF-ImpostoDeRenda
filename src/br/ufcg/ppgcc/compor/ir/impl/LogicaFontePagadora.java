@@ -61,4 +61,7 @@ public class LogicaFontePagadora {
 		return soma;
 	}	
 
+	public void limpar() {
+		fontes.clear();
+	}
 }
