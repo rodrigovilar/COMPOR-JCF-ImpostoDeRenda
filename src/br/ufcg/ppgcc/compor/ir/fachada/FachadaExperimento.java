@@ -16,4 +16,6 @@ public interface FachadaExperimento {
 
 	List<Dependente> listarDependentes(Titular titular);
 
+	Resultado declaracaoCompleta(Titular titular);
+
 }
