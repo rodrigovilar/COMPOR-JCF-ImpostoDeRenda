@@ -1,13 +1,20 @@
 package br.ufcg.ppgcc.compor.ir.impl;
 
+import java.util.List;
+
+import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class LogicaDeclaracaoCompleta {
 
 	public Resultado declaracaoCompleta(Titular titular) {
+		List<Dependente> dependentes = 
+				LogicaDependente.getInstancia().getDependentes(titular);
+		
 		double totalRecebido = LogicaFontePagadora.getInstance().totalRecebido(titular);
-		double impostoDevido = impostoDevido(totalRecebido);
+		double baseCalculo = descontoDependentes(totalRecebido, dependentes);
+		double impostoDevido = impostoDevido(baseCalculo);
 
 		Resultado resultado = new Resultado();
 		resultado.setImpostoDevido(impostoDevido);
@@ -55,4 +62,8 @@ public class LogicaDeclaracaoCompleta {
 		return (totalRecebido * taxa) - parcelaADeduzir;
 	}
 
+	public double descontoDependentes(double totalRecebido,
+			List<Dependente> dependentes) {
+		return Math.max(0, totalRecebido - (dependentes.size() * 1974.72));
+	}
 }

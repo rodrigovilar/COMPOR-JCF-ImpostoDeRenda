@@ -13,7 +13,7 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	private LogicaTitular logicaTitular = LogicaTitular.getInstance();
 	private LogicaFontePagadora logicaFontePagadora = LogicaFontePagadora
 			.getInstance();
-	private LogicaDependente logicaDependente = new LogicaDependente();
+	private LogicaDependente logicaDependente = LogicaDependente.getInstancia();
 	private LogicaDeclaracaoCompleta logicaDeclaracaoCompleta = new LogicaDeclaracaoCompleta();
 
 	public FachadaExperimentoImpl() {
