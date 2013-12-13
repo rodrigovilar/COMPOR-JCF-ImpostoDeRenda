@@ -1,11 +1,12 @@
 package br.ufcg.ppgcc.compor.ir.teste;
 
-import static org.junit.Assert.assertEquals;
 import static br.ufcg.ppgcc.compor.ir.teste.FontePagadoraHelper.criarFontePagadoraPorRenda;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
@@ -31,20 +32,6 @@ public class DeclaracaoCompletaTest {
 
 		Titular titular3 = TitularHelper.criarTitularPadrao2();
 		cadastrarCalcularImpostoDevido(0, titular3, 5000, 10000);
-	}
-
-	private void cadastrarCalcularImpostoDevido(double impostoDevido,
-			Titular titular, int... rendas) {
-
-		fachada.criarNovoTitular(titular);
-
-		for (int renda : rendas) {
-			FontePagadora fonte = criarFontePagadoraPorRenda(renda);
-			fachada.criarFontePagadora(titular, fonte);
-		}
-
-		Resultado completo = fachada.declaracaoCompleta(titular);
-		assertEquals(impostoDevido, completo.getImpostoDevido(), 0.1);
 	}
 
 	@Test
@@ -95,4 +82,44 @@ public class DeclaracaoCompletaTest {
 		cadastrarCalcularImpostoDevido(265921.62, titular3, 300000, 500000,
 				200000);
 	}
+	
+	@Test
+	public void T_04_06_calculoImpostoComDependente() {
+		Titular titular1 = TitularHelper.criarTitularPadrao();
+		Dependente dependente1 = DependenteHelper.criarDependentePadrao1();
+		cadastrarCalcularImpostoDevido(4404.89, titular1, 51000, dependente1);
+		
+		//TODO calcular com todas as faixas e com vários dependentes
+	}
+
+	private void cadastrarCalcularImpostoDevido(double impostoDevido,
+			Titular titular, int... rendas) {
+
+		fachada.criarNovoTitular(titular);
+
+		for (int renda : rendas) {
+			FontePagadora fonte = criarFontePagadoraPorRenda(renda);
+			fachada.criarFontePagadora(titular, fonte);
+		}
+
+		Resultado completo = fachada.declaracaoCompleta(titular);
+		assertEquals(impostoDevido, completo.getImpostoDevido(), 0.1);
+	}
+
+	private void cadastrarCalcularImpostoDevido(double impostoDevido,
+			Titular titular, int renda, Dependente... dependentes) {
+
+		fachada.criarNovoTitular(titular);
+
+		FontePagadora fonte = criarFontePagadoraPorRenda(renda);
+		fachada.criarFontePagadora(titular, fonte);
+		
+		for (Dependente dependente : dependentes) {
+			fachada.criarDependente(titular, dependente);
+		}
+
+		Resultado completo = fachada.declaracaoCompleta(titular);
+		assertEquals(impostoDevido, completo.getImpostoDevido(), 0.1);
+	}
+
 }
