@@ -46,4 +46,8 @@ public class LogicaDependente {
 		return dependentes.get(titular);
 	}
 
+	public void limpar() {
+		dependentes.clear();		
+	}
+
 }

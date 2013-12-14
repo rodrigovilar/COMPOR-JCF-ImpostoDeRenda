@@ -19,6 +19,7 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	public FachadaExperimentoImpl() {
 		logicaTitular.limpar();
 		logicaFontePagadora.limpar();
+		logicaDependente.limpar();
 	}
 
 	public void criarNovoTitular(Titular titular) {
