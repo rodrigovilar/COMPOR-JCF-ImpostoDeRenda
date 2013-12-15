@@ -49,4 +49,15 @@ public class GerenteFontePagadora extends Component {
 		return soma;
 	}	
 
+	@Service
+	public Double totalPago(Titular titular) {
+		List<FontePagadora> fontes = listarFontesPagadoras(titular);
+		double soma = 0.0;
+		
+		for (FontePagadora fontePagadora : fontes) {
+			soma += fontePagadora.getImpostoPago();
+		}
+		
+		return soma;
+	}
 }

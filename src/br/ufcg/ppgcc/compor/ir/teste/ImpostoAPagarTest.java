@@ -9,6 +9,7 @@ import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
+import br.ufcg.ppgcc.compor.ir.impl.FachadaExperimentoImpl;
 
 public class ImpostoAPagarTest {
 
@@ -17,7 +18,7 @@ public class ImpostoAPagarTest {
 	@Before
 	public void iniciar() {
 		// Coloque sua Fachada aqui.
-		fachada = null;
+		fachada = new FachadaExperimentoImpl();
 	}
 
 	@Test

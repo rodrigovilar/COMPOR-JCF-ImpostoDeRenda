@@ -15,7 +15,7 @@ public class GerenteDeclaracaoCompleta extends Component {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Service(requiredServices = "totalRecebido,listarDependentes")
+	@Service(requiredServices = "totalPago,totalRecebido,listarDependentes")
 	public Resultado declaracaoCompleta(Titular titular) {
 		List<Dependente> dependentes = (List<Dependente>) requestService(
 				"listarDependentes", titular);
@@ -23,9 +23,12 @@ public class GerenteDeclaracaoCompleta extends Component {
 		double totalRecebido = (Double) requestService("totalRecebido", titular);
 		double baseCalculo = descontoDependentes(totalRecebido, dependentes);
 		double impostoDevido = impostoDevido(baseCalculo);
+		double impostoPago = (Double) requestService("totalPago", titular);
 
 		Resultado resultado = new Resultado();
 		resultado.setImpostoDevido(impostoDevido);
+		resultado.setImpostoPago(impostoPago);
+		resultado.setImpostoAPagar(impostoDevido - impostoPago); 
 		return resultado;
 	}
 
