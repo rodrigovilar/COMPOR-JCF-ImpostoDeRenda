@@ -19,9 +19,19 @@ public class FontePagadoraHelper {
 
 	static FontePagadora criarFontePagadora(String nome, String cpfCnpj,
 			double rendimentoRecebidos) {
+		return criarFontePagadora(nome, cpfCnpj, rendimentoRecebidos, 0);
+	}
+
+	static FontePagadora criarFontePagadoraPorRendaEImpostoPago(int renda, double impostoPago) {
+		return criarFontePagadora("UFCG", "00.000.000/0000-00", renda, impostoPago);
+	}
+	
+	static FontePagadora criarFontePagadora(String nome, String cpfCnpj,
+			double rendimentoRecebidos, double impostoPago) {
 		FontePagadora fonte = new FontePagadora();
 		fonte.setNome(nome);
 		fonte.setCpfCnpj(cpfCnpj);
+		fonte.setImpostoPago(impostoPago);
 		fonte.setRendimentosRecebidos(rendimentoRecebidos);
 		return fonte;
 	}
