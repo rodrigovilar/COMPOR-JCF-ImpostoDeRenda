@@ -15,9 +15,12 @@ public class LogicaDeclaracaoCompleta {
 		double totalRecebido = LogicaFontePagadora.getInstance().totalRecebido(titular);
 		double baseCalculo = descontoDependentes(totalRecebido, dependentes);
 		double impostoDevido = impostoDevido(baseCalculo);
+		double impostoPago = LogicaFontePagadora.getInstance().totalPago(titular);
 
 		Resultado resultado = new Resultado();
 		resultado.setImpostoDevido(impostoDevido);
+		resultado.setImpostoPago(impostoPago);
+		resultado.setImpostoAPagar(impostoDevido - impostoPago); 
 		return resultado;
 	}
 

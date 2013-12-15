@@ -20,9 +20,9 @@ public class LogicaFontePagadora {
 		}
 		return instance;
 	}
-	
-	private LogicaFontePagadora(){}
-	
+
+	private LogicaFontePagadora() {
+	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
 		Validacao.obrigatorio(fonte.getNome(), "O campo nome é obrigatório");
@@ -53,13 +53,24 @@ public class LogicaFontePagadora {
 	public double totalRecebido(Titular titular) {
 		List<FontePagadora> fontes = getFontes(titular);
 		double soma = 0.0;
-		
+
 		for (FontePagadora fontePagadora : fontes) {
 			soma += fontePagadora.getRendimentosRecebidos();
 		}
-		
+
 		return soma;
-	}	
+	}
+
+	public double totalPago(Titular titular) {
+		List<FontePagadora> fontes = getFontes(titular);
+		double soma = 0.0;
+
+		for (FontePagadora fontePagadora : fontes) {
+			soma += fontePagadora.getImpostoPago();
+		}
+
+		return soma;
+	}
 
 	public void limpar() {
 		fontes.clear();
