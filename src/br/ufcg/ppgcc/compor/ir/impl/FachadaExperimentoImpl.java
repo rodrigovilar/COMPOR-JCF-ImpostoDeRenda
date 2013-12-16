@@ -26,6 +26,7 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 
 	public FachadaExperimentoImpl(boolean usarAutenticacao) {
 		this();
+		logicaAutenticacao.setUsarAutenticacao(usarAutenticacao);
 	}
 
 	public void criarNovoTitular(Titular titular) {

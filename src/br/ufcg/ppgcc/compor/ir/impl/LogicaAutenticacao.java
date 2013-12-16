@@ -11,6 +11,7 @@ public class LogicaAutenticacao {
 
 	private Map<String,String> logins = new HashMap<String, String>();
 	private boolean logado = false;
+	private boolean usarAutenticacao = false;
 
 	public static LogicaAutenticacao getInstancia() {
 		if (instance == null) {
@@ -20,6 +21,11 @@ public class LogicaAutenticacao {
 	}
 	
 	private LogicaAutenticacao(){}
+	
+	public void setUsarAutenticacao(boolean usarAutenticacao) {
+		this.usarAutenticacao = usarAutenticacao;
+		
+	}
 	
 	public void login(String login, String senha) {
 		if (!logins.containsKey(login)) {
@@ -44,10 +50,11 @@ public class LogicaAutenticacao {
 		logins.clear();
 		logins.put("admin", "admin");
 		logado = false;
+		usarAutenticacao = false;
 	}
 	
 	public void verificarLogin() {
-		if (!logado) {
+		if (usarAutenticacao && !logado) {
 			throw new ExcecaoImpostoDeRenda("Usuário não logado");
 		}
 	}

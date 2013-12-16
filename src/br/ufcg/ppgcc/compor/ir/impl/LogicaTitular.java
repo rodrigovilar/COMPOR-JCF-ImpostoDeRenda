@@ -21,6 +21,8 @@ public class LogicaTitular {
 	private LogicaTitular(){}
 	
 	public void criarNovoTitular(Titular titular) {
+		LogicaAutenticacao.getInstancia().verificarLogin();
+		
 		Validacao.obrigatorio(titular.getNome(), "O campo nome é obrigatório");
 		Validacao.obrigatorio(titular.getCpf(), "O campo CPF é obrigatório");
 		Validacao.cpf(titular.getCpf(), "O campo CPF está inválido");

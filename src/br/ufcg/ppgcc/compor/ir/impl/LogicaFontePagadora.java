@@ -25,6 +25,8 @@ public class LogicaFontePagadora {
 	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
+		LogicaAutenticacao.getInstancia().verificarLogin();
+
 		Validacao.obrigatorio(fonte.getNome(), "O campo nome é obrigatório");
 		Validacao.obrigatorio(fonte.getCpfCnpj(),
 				"O campo CPF/CNPJ é obrigatório");

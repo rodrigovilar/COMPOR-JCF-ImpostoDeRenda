@@ -9,6 +9,8 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 public class LogicaDeclaracaoCompleta {
 
 	public Resultado declaracaoCompleta(Titular titular) {
+		LogicaAutenticacao.getInstancia().verificarLogin();
+
 		List<Dependente> dependentes = 
 				LogicaDependente.getInstancia().getDependentes(titular);
 		

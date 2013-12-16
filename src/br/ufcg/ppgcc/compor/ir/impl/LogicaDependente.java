@@ -24,6 +24,8 @@ public class LogicaDependente {
 	private LogicaDependente(){}
 	
 	public void criarDependente(Titular titular, Dependente dependente) {
+		LogicaAutenticacao.getInstancia().verificarLogin();
+
 		Validacao.obrigatorio(dependente.getNome(), "O campo nome é obrigatório");
 		Validacao.obrigatorio(dependente.getCpf(), "O campo CPF é obrigatório");
 		Validacao.numeroDiferenteZero(dependente.getTipo(), "O campo tipo é obrigatório");
