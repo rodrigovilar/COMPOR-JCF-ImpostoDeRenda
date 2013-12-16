@@ -31,4 +31,15 @@ public class AutenticacaoTest {
 	public void T_06_03_loginDefaultDesconhecido() {
 		fachada.login("admin2", "admin");
 	}
+	
+	@Test
+	public void T_06_04_criarUsuarioLogar() {
+		AutenticacaoHelper.adminCriarUsuarioLogar(fachada, "usuario", "senha");
+	}
+
+	@Test(expected=ExcecaoImpostoDeRenda.class)
+	public void T_06_05_criarUsuarioSemPermissao() {
+		fachada.criarUsuario("usuario", "senha");
+	}
+
 }

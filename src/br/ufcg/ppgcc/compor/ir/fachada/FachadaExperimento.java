@@ -20,4 +20,6 @@ public interface FachadaExperimento {
 
 	void login(String login, String senha);
 
+	void criarUsuario(String login, String senha);
+
 }
