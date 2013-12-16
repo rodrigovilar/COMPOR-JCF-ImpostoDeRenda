@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
+import br.ufcg.ppgcc.compor.ir.impl.FachadaExperimentoImpl;
 
 public class AutenticacaoTest {
 
@@ -13,7 +14,7 @@ public class AutenticacaoTest {
 	@Before
 	public void iniciar() {
 		// Coloque sua Fachada aqui, com segurança habilitada.
-		fachada = null;
+		fachada = new FachadaExperimentoImpl(true);
 	}
 
 	@Test

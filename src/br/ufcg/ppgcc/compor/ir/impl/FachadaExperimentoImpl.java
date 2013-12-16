@@ -10,6 +10,7 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class FachadaExperimentoImpl implements FachadaExperimento {
 
+	private LogicaAutenticacao logicaAutenticacao = LogicaAutenticacao.getInstancia();
 	private LogicaTitular logicaTitular = LogicaTitular.getInstance();
 	private LogicaFontePagadora logicaFontePagadora = LogicaFontePagadora
 			.getInstance();
@@ -20,6 +21,11 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 		logicaTitular.limpar();
 		logicaFontePagadora.limpar();
 		logicaDependente.limpar();
+		logicaAutenticacao.limpar();
+	}
+
+	public FachadaExperimentoImpl(boolean usarAutenticacao) {
+		this();
 	}
 
 	public void criarNovoTitular(Titular titular) {
@@ -51,5 +57,10 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	@Override
 	public Resultado declaracaoCompleta(Titular titular) {
 		return logicaDeclaracaoCompleta.declaracaoCompleta(titular);
+	}
+
+	@Override
+	public void login(String login, String senha) {
+		logicaAutenticacao.login(login, senha);
 	}
 }
