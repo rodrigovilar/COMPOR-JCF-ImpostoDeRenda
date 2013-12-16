@@ -12,6 +12,7 @@ public class GerenteAutenticacao extends Component{
 	private static GerenteAutenticacao instance;
 
 	private Map<String,String> logins = new HashMap<String, String>();
+	private boolean logado = false;
 
 	public static GerenteAutenticacao getInstancia() {
 		if (instance == null) {
@@ -41,5 +42,19 @@ public class GerenteAutenticacao extends Component{
 				throw new ExcecaoImpostoDeRenda("Senha errada");
 			} 			
 		}
+		
+		logado = true;
+	}
+	
+	public void verificarLogin() {
+		if (!logado) {
+			throw new ExcecaoImpostoDeRenda("Usuário não logado");
+		}
+	}
+
+	@Service
+	public void criarUsuario(String login, String senha) {
+		verificarLogin();
+		logins.put(login, senha);
 	}
 }

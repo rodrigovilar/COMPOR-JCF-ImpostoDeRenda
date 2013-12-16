@@ -76,4 +76,9 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 		requestService("login", login, senha);
 	}
 
+	@Override
+	public void criarUsuario(String login, String senha) {
+		requestService("criarUsuario", login, senha);
+	}
+
 }
