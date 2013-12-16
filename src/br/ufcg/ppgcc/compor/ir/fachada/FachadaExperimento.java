@@ -18,4 +18,6 @@ public interface FachadaExperimento {
 
 	Resultado declaracaoCompleta(Titular titular);
 
+	void login(String login, String senha);
+
 }
