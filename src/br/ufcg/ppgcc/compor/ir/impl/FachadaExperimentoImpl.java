@@ -63,4 +63,9 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	public void login(String login, String senha) {
 		logicaAutenticacao.login(login, senha);
 	}
+
+	@Override
+	public void criarUsuario(String login, String senha) {
+		logicaAutenticacao.criarUsuario(login, senha);
+	}
 }

@@ -10,6 +10,7 @@ public class LogicaAutenticacao {
 	private static LogicaAutenticacao instance;
 
 	private Map<String,String> logins = new HashMap<String, String>();
+	private boolean logado = false;
 
 	public static LogicaAutenticacao getInstancia() {
 		if (instance == null) {
@@ -35,10 +36,24 @@ public class LogicaAutenticacao {
 				throw new ExcecaoImpostoDeRenda("Senha errada");
 			} 			
 		}
+		
+		logado = true;
 	}
 
 	public void limpar() {
 		logins.clear();
 		logins.put("admin", "admin");
+		logado = false;
+	}
+	
+	public void verificarLogin() {
+		if (!logado) {
+			throw new ExcecaoImpostoDeRenda("Usuário não logado");
+		}
+	}
+
+	public void criarUsuario(String login, String senha) {
+		verificarLogin();
+		logins.put(login, senha);
 	}
 }
