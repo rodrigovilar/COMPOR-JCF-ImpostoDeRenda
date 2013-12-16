@@ -11,9 +11,17 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
 public class FachadaExperimentoImpl extends ComporFacade implements
 		FachadaExperimento {
+	
+	public FachadaExperimentoImpl() {}
+	
+	public FachadaExperimentoImpl(boolean usarAutenticacao) {
+		this();
+	}
 
 	@Override
 	protected void addComponents() {
+		add(new GerenteAutenticacao());
+		
 		GerenteTitular gerenteTitular = new GerenteTitular();
 		add(gerenteTitular);
 		add(new ValidacaoTitular(gerenteTitular));
@@ -61,6 +69,11 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 	@Override
 	public Resultado declaracaoCompleta(Titular titular) {
 		return (Resultado) requestService("declaracaoCompleta", titular);
+	}
+
+	@Override
+	public void login(String login, String senha) {
+		requestService("login", login, senha);
 	}
 
 }
