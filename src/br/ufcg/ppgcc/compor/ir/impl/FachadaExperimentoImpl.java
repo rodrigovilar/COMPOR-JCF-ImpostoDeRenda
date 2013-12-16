@@ -16,6 +16,7 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 	
 	public FachadaExperimentoImpl(boolean usarAutenticacao) {
 		this();
+		requestService("setUsarAutenticacao", Boolean.valueOf(usarAutenticacao));
 	}
 
 	@Override

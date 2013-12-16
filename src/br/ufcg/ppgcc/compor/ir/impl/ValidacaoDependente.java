@@ -11,8 +11,9 @@ public class ValidacaoDependente extends Decorator<GerenteDependente> {
 		super(innerComponent);
 	}
 
-	@Service(requiredServices="validarTitular")
+	@Service(requiredServices="validarTitular,verificarLogin")
 	public void criarDependente(Titular titular, Dependente dependente) {
+		requestService("verificarLogin");
 		Validacao.obrigatorio(dependente.getNome(), "O campo nome é obrigatório");
 		Validacao.obrigatorio(dependente.getCpf(), "O campo CPF é obrigatório");
 		Validacao.numeroDiferenteZero(dependente.getTipo(), "O campo tipo é obrigatório");

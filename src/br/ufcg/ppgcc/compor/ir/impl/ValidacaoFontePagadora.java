@@ -11,8 +11,9 @@ public class ValidacaoFontePagadora extends Decorator<GerenteFontePagadora> {
 		super(innerComponent);
 	}
 
-	@Service(requiredServices="validarTitular")
+	@Service(requiredServices="validarTitular,verificarLogin")
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
+		requestService("verificarLogin");
 		Validacao.obrigatorio(fonte.getNome(), "O campo nome é obrigatório");
 		Validacao.obrigatorio(fonte.getCpfCnpj(),
 				"O campo CPF/CNPJ é obrigatório");

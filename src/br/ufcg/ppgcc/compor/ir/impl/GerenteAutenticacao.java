@@ -13,6 +13,7 @@ public class GerenteAutenticacao extends Component{
 
 	private Map<String,String> logins = new HashMap<String, String>();
 	private boolean logado = false;
+	private boolean usarAutenticacao;
 
 	public static GerenteAutenticacao getInstancia() {
 		if (instance == null) {
@@ -25,6 +26,12 @@ public class GerenteAutenticacao extends Component{
 		super("Gerente de autenticacao");
 		logins.put("admin", "admin");
 	}
+
+	@Service
+	public void setUsarAutenticacao(Boolean usarAutenticacao) {
+		this.usarAutenticacao = usarAutenticacao;
+	}
+
 
 	@Service
 	public void login(String login, String senha) {
@@ -46,8 +53,9 @@ public class GerenteAutenticacao extends Component{
 		logado = true;
 	}
 	
+	@Service
 	public void verificarLogin() {
-		if (!logado) {
+		if (usarAutenticacao && !logado) {
 			throw new ExcecaoImpostoDeRenda("Usuário não logado");
 		}
 	}

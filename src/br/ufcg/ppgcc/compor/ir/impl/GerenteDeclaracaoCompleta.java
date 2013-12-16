@@ -15,8 +15,9 @@ public class GerenteDeclaracaoCompleta extends Component {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Service(requiredServices = "totalPago,totalRecebido,listarDependentes")
+	@Service(requiredServices = "totalPago,totalRecebido,listarDependentes,verificarLogin")
 	public Resultado declaracaoCompleta(Titular titular) {
+		requestService("verificarLogin");
 		List<Dependente> dependentes = (List<Dependente>) requestService(
 				"listarDependentes", titular);
 

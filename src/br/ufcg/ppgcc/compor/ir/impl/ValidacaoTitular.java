@@ -10,8 +10,9 @@ public class ValidacaoTitular extends Decorator<GerenteTitular> {
 		super(innerComponent);
 	}
 
-	@Service
+	@Service(requiredServices="verificarLogin")
 	public void criarTitular(Titular titular) {
+		requestService("verificarLogin");
 		Validacao.obrigatorio(titular.getNome(), "O campo nome é obrigatório");
 		Validacao.obrigatorio(titular.getCpf(), "O campo CPF é obrigatório");
 		Validacao.cpf(titular.getCpf(), "O campo CPF está inválido");

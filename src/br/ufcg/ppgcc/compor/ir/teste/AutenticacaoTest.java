@@ -19,7 +19,7 @@ public class AutenticacaoTest {
 	@Before
 	public void iniciar() {
 		// Coloque sua Fachada aqui, com segurança habilitada.
-		fachada = new FachadaExperimentoImpl();
+		fachada = new FachadaExperimentoImpl(true);
 	}
 
 	@Test
@@ -87,6 +87,8 @@ public class AutenticacaoTest {
 			Assert.fail("A declaração completa deveria ter lançado exceção");
 		} catch (ExcecaoImpostoDeRenda e) {
 			Assert.assertEquals(e.getMessage(), "Usuário não logado");
+		} catch (RuntimeException e) {
+			Assert.assertEquals(e.getCause().getMessage(), "Usuário não logado");
 		}
 
 		AutenticacaoHelper.adminCriarUsuarioLogar(fachada, "usuario", "senha");
