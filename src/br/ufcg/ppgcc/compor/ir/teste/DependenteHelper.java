@@ -60,6 +60,8 @@ public class DependenteHelper {
 			Assert.fail("A criação de dependente deveria ter lançado exceção");
 		} catch (ExcecaoImpostoDeRenda e) {
 			Assert.assertEquals(e.getMessage(), mensagem);
+		} catch (RuntimeException e) {
+			Assert.assertEquals(e.getCause().getMessage(), mensagem);
 		}
 	}
 
