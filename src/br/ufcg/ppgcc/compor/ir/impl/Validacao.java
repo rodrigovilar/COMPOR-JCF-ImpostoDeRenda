@@ -12,7 +12,13 @@ public class Validacao {
 			throw new ExcecaoImpostoDeRenda(mensagem);
 		}
 	}
-	
+
+	public static void obrigatorio(Object valor, String mensagem) {
+		if (valor == null) {
+			throw new ExcecaoImpostoDeRenda(mensagem);
+		}
+	}
+
 	public static void cpf(String cpf, String mensagem){
 		if (!cpf.matches(MASCARA_CPF)) {
 			throw new ExcecaoImpostoDeRenda(mensagem);			

@@ -6,6 +6,8 @@ import net.compor.frameworks.jcf.api.ComporFacade;
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
+import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.ir.fachada.Pessoa;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
@@ -34,7 +36,11 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 		GerenteDependente gerenteDependente = new GerenteDependente();
 		add(gerenteDependente);
 		add(new ValidacaoDependente(gerenteDependente));
-		
+
+		GerenteGastoDedutivel gerenteGastoDedutivel = new GerenteGastoDedutivel();
+		add(gerenteGastoDedutivel);
+		add(new ValidacaoGastoDedutivel(gerenteGastoDedutivel));
+
 		add(new GerenteDeclaracaoCompleta());
 	}
 
@@ -80,6 +86,18 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 	@Override
 	public void criarUsuario(String login, String senha) {
 		requestService("criarUsuario", login, senha);
+	}
+
+	@Override
+	public void criarGastoDedutivel(Pessoa pessoa, GastoDedutivel gasto) {
+		requestService("criarGastoDedutivel", pessoa, gasto);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<GastoDedutivel> listarGastosDedutiveis(Pessoa pessoa) {
+		return (List<GastoDedutivel>) requestService("listarGastosDedutiveis",
+				pessoa);
 	}
 
 }

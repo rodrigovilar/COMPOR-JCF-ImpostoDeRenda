@@ -5,6 +5,8 @@ import java.util.List;
 import net.compor.frameworks.jcf.api.Component;
 import net.compor.frameworks.jcf.api.Service;
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
+import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel.TipoGasto;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
@@ -15,7 +17,7 @@ public class GerenteDeclaracaoCompleta extends Component {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Service(requiredServices = "totalPago,totalRecebido,listarDependentes,verificarLogin")
+	@Service(requiredServices = "totalPago,totalRecebido,listarDependentes,verificarLogin,getGastosEducacao,getGastosSaude")
 	public Resultado declaracaoCompleta(Titular titular) {
 		requestService("verificarLogin");
 		List<Dependente> dependentes = (List<Dependente>) requestService(
@@ -23,6 +25,14 @@ public class GerenteDeclaracaoCompleta extends Component {
 
 		double totalRecebido = (Double) requestService("totalRecebido", titular);
 		double baseCalculo = descontoDependentes(totalRecebido, dependentes);
+		
+		List<GastoDedutivel> gastosEducacao = 
+				(List<GastoDedutivel>) requestService("getGastosEducacao", titular, dependentes);
+		baseCalculo = descontoEducacao(baseCalculo, gastosEducacao);
+		List<GastoDedutivel> gastosSaude = 
+				(List<GastoDedutivel>) requestService("getGastosSaude", titular, dependentes);
+		baseCalculo = descontoSaude(baseCalculo, gastosSaude);
+		
 		double impostoDevido = impostoDevido(baseCalculo);
 		double impostoPago = (Double) requestService("totalPago", titular);
 
@@ -77,5 +87,31 @@ public class GerenteDeclaracaoCompleta extends Component {
 	public double descontoDependentes(double totalRecebido,
 			List<Dependente> dependentes) {
 		return Math.max(0, totalRecebido - (dependentes.size() * 1974.72));
+	}
+	
+	public double descontoSaude(double totalRecebido, List<GastoDedutivel> gastos) {
+		double somaSaude = 0.0;
+		
+		for (GastoDedutivel gasto : gastos) {
+			if (TipoGasto.Saude.equals(gasto.getTipo())) {
+				somaSaude += gasto.getValor();
+			}
+		}
+		
+		return Math.max(0, totalRecebido - somaSaude);
+	}
+
+	public double descontoEducacao(double totalRecebido, List<GastoDedutivel> gastos) {
+		double somaEducacao = 0.0;
+		
+		for (GastoDedutivel gasto : gastos) {
+			if (TipoGasto.Educacao.equals(gasto.getTipo())) {
+				somaEducacao += gasto.getValor();
+			}
+		}
+		
+		somaEducacao = Math.min(3091.35, somaEducacao);
+		
+		return Math.max(0, totalRecebido - somaEducacao);
 	}
 }
