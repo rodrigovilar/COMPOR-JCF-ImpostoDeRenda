@@ -22,4 +22,8 @@ public interface FachadaExperimento {
 
 	void criarUsuario(String login, String senha);
 
+	void criarGastoDedutivel(Pessoa pessoa, GastoDedutivel gasto);
+
+	List<GastoDedutivel> listarGastosDedutiveis(Pessoa pessoa);
+
 }
