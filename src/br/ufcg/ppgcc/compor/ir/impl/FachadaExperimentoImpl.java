@@ -5,6 +5,8 @@ import java.util.List;
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
+import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.ir.fachada.Pessoa;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
@@ -16,6 +18,7 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 			.getInstance();
 	private LogicaDependente logicaDependente = LogicaDependente.getInstancia();
 	private LogicaDeclaracaoCompleta logicaDeclaracaoCompleta = new LogicaDeclaracaoCompleta();
+	private LogicaGastoDedutivel logicaGastoDedutivel = LogicaGastoDedutivel.getInstancia();
 
 	public FachadaExperimentoImpl() {
 		logicaTitular.limpar();
@@ -68,5 +71,15 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	@Override
 	public void criarUsuario(String login, String senha) {
 		logicaAutenticacao.criarUsuario(login, senha);
+	}
+
+	@Override
+	public void criarGastoDedutivel(Pessoa pessoa, GastoDedutivel gasto) {
+		logicaGastoDedutivel.criarGastoDedutivel(pessoa, gasto);
+	}
+
+	@Override
+	public List<GastoDedutivel> listarGastosDedutiveis(Pessoa pessoa) {
+		return logicaGastoDedutivel.listarGastosDedutiveis(pessoa);
 	}
 }

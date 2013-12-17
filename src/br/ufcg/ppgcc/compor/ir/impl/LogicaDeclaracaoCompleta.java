@@ -3,6 +3,8 @@ package br.ufcg.ppgcc.compor.ir.impl;
 import java.util.List;
 
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
+import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel.TipoGasto;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 
@@ -16,6 +18,14 @@ public class LogicaDeclaracaoCompleta {
 		
 		double totalRecebido = LogicaFontePagadora.getInstance().totalRecebido(titular);
 		double baseCalculo = descontoDependentes(totalRecebido, dependentes);
+		
+		List<GastoDedutivel> gastosEducacao = 
+				LogicaGastoDedutivel.getInstancia().getGastosEducacao(titular, dependentes);
+		baseCalculo = descontoEducacao(baseCalculo, gastosEducacao);
+		List<GastoDedutivel> gastosSaude = 
+				LogicaGastoDedutivel.getInstancia().getGastosSaude(titular, dependentes);
+		baseCalculo = descontoSaude(baseCalculo, gastosSaude);
+		
 		double impostoDevido = impostoDevido(baseCalculo);
 		double impostoPago = LogicaFontePagadora.getInstance().totalPago(titular);
 
@@ -71,4 +81,31 @@ public class LogicaDeclaracaoCompleta {
 			List<Dependente> dependentes) {
 		return Math.max(0, totalRecebido - (dependentes.size() * 1974.72));
 	}
+	
+	public double descontoSaude(double totalRecebido, List<GastoDedutivel> gastos) {
+		double somaSaude = 0.0;
+		
+		for (GastoDedutivel gasto : gastos) {
+			if (TipoGasto.Saude.equals(gasto.getTipo())) {
+				somaSaude += gasto.getValor();
+			}
+		}
+		
+		return Math.max(0, totalRecebido - somaSaude);
+	}
+
+	public double descontoEducacao(double totalRecebido, List<GastoDedutivel> gastos) {
+		double somaEducacao = 0.0;
+		
+		for (GastoDedutivel gasto : gastos) {
+			if (TipoGasto.Educacao.equals(gasto.getTipo())) {
+				somaEducacao += gasto.getValor();
+			}
+		}
+		
+		somaEducacao = Math.min(3091.35, somaEducacao);
+		
+		return Math.max(0, totalRecebido - somaEducacao);
+	}
+
 }

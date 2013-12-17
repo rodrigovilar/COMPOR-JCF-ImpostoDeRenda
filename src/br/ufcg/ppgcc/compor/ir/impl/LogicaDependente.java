@@ -52,4 +52,14 @@ public class LogicaDependente {
 		dependentes.clear();		
 	}
 
+	public List<Dependente> getDependentes() {
+		List<Dependente> resultado = new ArrayList<Dependente>();
+		
+		for (Titular titular : dependentes.keySet()) {
+			resultado.addAll(dependentes.get(titular));
+		}
+		
+		return resultado;
+	}
+
 }

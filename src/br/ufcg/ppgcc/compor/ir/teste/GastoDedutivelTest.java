@@ -12,6 +12,7 @@ import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
 import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel.TipoGasto;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
+import br.ufcg.ppgcc.compor.ir.impl.FachadaExperimentoImpl;
 
 public class GastoDedutivelTest {
 
@@ -20,7 +21,7 @@ public class GastoDedutivelTest {
 	@Before
 	public void iniciar() {
 		// Coloque sua Fachada aqui.
-		fachada = null; 
+		fachada = new FachadaExperimentoImpl(); 
 	}
 
 	@Test
@@ -99,12 +100,12 @@ public class GastoDedutivelTest {
 		GastoDedutivel gastoSemValor = 
 				GastoDedutivelHelper.criarGastoDedutivel("000.000.000-00", TipoGasto.Educacao, 0);
 		GastoDedutivelHelper.excecaoCriarGastoDedutivel(fachada, titular, gastoSemValor, 
-				"O campo tipo é obrigatório");
+				"O campo valor é obrigatório");
 
 		GastoDedutivel gastoComValorInvalido = 
 				GastoDedutivelHelper.criarGastoDedutivel("000.000.000-00", TipoGasto.Educacao, -120);
 		GastoDedutivelHelper.excecaoCriarGastoDedutivel(fachada, titular, gastoComValorInvalido, 
-				"O campo tipo é inválido");
+				"O campo valor deve ser maior que zero");
 	}
 	
 	@Test
