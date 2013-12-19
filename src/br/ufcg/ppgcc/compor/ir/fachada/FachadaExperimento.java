@@ -26,4 +26,6 @@ public interface FachadaExperimento {
 
 	List<GastoDedutivel> listarGastosDedutiveis(Pessoa pessoa);
 
+	void setAuditor(Auditor auditor);
+
 }
