@@ -17,8 +17,9 @@ public class GerenteDeclaracaoCompleta extends Component {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Service(requiredServices = "totalPago,totalRecebido,listarDependentes,verificarLogin,getGastosEducacao,getGastosSaude")
+	@Service(requiredServices = "iniciarTransacao,concluirTransacao,totalPago,totalRecebido,listarDependentes,verificarLogin,getGastosEducacao,getGastosSaude")
 	public Resultado declaracaoCompleta(Titular titular) {
+		requestService("iniciarTransacao", "Relatório da Declaração completa para " + titular.getNome());
 		requestService("verificarLogin");
 		List<Dependente> dependentes = (List<Dependente>) requestService(
 				"listarDependentes", titular);
@@ -40,6 +41,8 @@ public class GerenteDeclaracaoCompleta extends Component {
 		resultado.setImpostoDevido(impostoDevido);
 		resultado.setImpostoPago(impostoPago);
 		resultado.setImpostoAPagar(impostoDevido - impostoPago); 
+
+		requestService("concluirTransacao");
 		return resultado;
 	}
 

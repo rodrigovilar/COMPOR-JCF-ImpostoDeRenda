@@ -11,8 +11,9 @@ public class ValidacaoGastoDedutivel extends Decorator<GerenteGastoDedutivel> {
 		super(innerComponent);
 	}
 
-	@Service(requiredServices="validarPessoa,validarTitular,verificarLogin")
+	@Service(requiredServices="iniciarTransacao,validarPessoa,validarTitular,verificarLogin,concluirTransacao")
 	public void criarGastoDedutivel(Pessoa pessoa, GastoDedutivel gasto) {
+		requestService("iniciarTransacao", "Criação do gasto " + gasto.getTipo());
 		requestService("verificarLogin");
 		Validacao.obrigatorio(gasto.getCnpjCpfReceptor(), "O campo CPF/CNPJ do receptor é obrigatório");
 		Validacao.obrigatorio(gasto.getTipo(), "O campo tipo é obrigatório");
@@ -23,6 +24,8 @@ public class ValidacaoGastoDedutivel extends Decorator<GerenteGastoDedutivel> {
 		requestService("validarPessoa", pessoa);
 
 		getInnerComponent().criarGastoDedutivel(pessoa, gasto);
+
+		requestService("concluirTransacao");
 	}
 
 }

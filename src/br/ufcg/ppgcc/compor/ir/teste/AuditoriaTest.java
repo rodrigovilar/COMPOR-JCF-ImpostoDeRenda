@@ -15,6 +15,7 @@ import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
+import br.ufcg.ppgcc.compor.ir.impl.FachadaExperimentoImpl;
 
 public class AuditoriaTest {
 
@@ -28,7 +29,7 @@ public class AuditoriaTest {
 		MockitoAnnotations.initMocks(this);
 
 		// Coloque sua Fachada aqui, com segurança habilitada.
-		fachada = null;
+		fachada = new FachadaExperimentoImpl(true);
 		fachada.setAuditor(auditor);
 	}
 
@@ -54,7 +55,7 @@ public class AuditoriaTest {
 			fachada.login("admin2", "admin");
 		} catch (ExcecaoImpostoDeRenda e) {}
 
-		verify(auditor).iniciandoTransacao(1, "admin2", "Login admin2");
+		verify(auditor).iniciandoTransacao(1, null, "Login admin2");
 		verify(auditor).transacaoAbortada(1, "Usuário desconhecido");
 	}
 	
@@ -194,7 +195,7 @@ public class AuditoriaTest {
 		AuditoriaHelper.verificarCriacaoTitularOk(auditor, 5, "usuario", "Jose");
 		AuditoriaHelper.verificarCriacaoFontePagadoraOk(auditor, 6, "usuario", "UFCG");
 
-		verify(auditor).iniciandoTransacao(7, null,
+		verify(auditor).iniciandoTransacao(7, "usuario",
 				"Relatório da Declaração completa para Jose");
 		verify(auditor).transacaoConcluida(7);
 	}

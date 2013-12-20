@@ -3,6 +3,7 @@ package br.ufcg.ppgcc.compor.ir.impl;
 import java.util.List;
 
 import net.compor.frameworks.jcf.api.ComporFacade;
+import br.ufcg.ppgcc.compor.ir.fachada.Auditor;
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
@@ -98,6 +99,11 @@ public class FachadaExperimentoImpl extends ComporFacade implements
 	public List<GastoDedutivel> listarGastosDedutiveis(Pessoa pessoa) {
 		return (List<GastoDedutivel>) requestService("listarGastosDedutiveis",
 				pessoa);
+	}
+
+	@Override
+	public void setAuditor(Auditor auditor) {
+		requestService("setAuditor", auditor);
 	}
 
 }
