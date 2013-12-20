@@ -2,6 +2,7 @@ package br.ufcg.ppgcc.compor.ir.impl;
 
 import java.util.List;
 
+import br.ufcg.ppgcc.compor.ir.fachada.Auditor;
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
@@ -19,12 +20,14 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	private LogicaDependente logicaDependente = LogicaDependente.getInstancia();
 	private LogicaDeclaracaoCompleta logicaDeclaracaoCompleta = new LogicaDeclaracaoCompleta();
 	private LogicaGastoDedutivel logicaGastoDedutivel = LogicaGastoDedutivel.getInstancia();
+	private LogicaAuditoria logicaAuditoria = LogicaAuditoria.getInstancia();
 
 	public FachadaExperimentoImpl() {
 		logicaTitular.limpar();
 		logicaFontePagadora.limpar();
 		logicaDependente.limpar();
 		logicaAutenticacao.limpar();
+		logicaAuditoria.limpar();
 	}
 
 	public FachadaExperimentoImpl(boolean usarAutenticacao) {
@@ -81,5 +84,10 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	@Override
 	public List<GastoDedutivel> listarGastosDedutiveis(Pessoa pessoa) {
 		return logicaGastoDedutivel.listarGastosDedutiveis(pessoa);
+	}
+
+	@Override
+	public void setAuditor(Auditor auditor) {
+		logicaAuditoria.setAuditor(auditor);
 	}
 }

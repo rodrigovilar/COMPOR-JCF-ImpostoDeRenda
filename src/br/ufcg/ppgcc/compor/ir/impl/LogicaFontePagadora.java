@@ -25,6 +25,7 @@ public class LogicaFontePagadora {
 	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
+		LogicaAuditoria.getInstancia().iniciarTransacao("Criação da fonte pagadora " + fonte.getNome());
 		LogicaAutenticacao.getInstancia().verificarLogin();
 
 		Validacao.obrigatorio(fonte.getNome(), "O campo nome é obrigatório");
@@ -39,6 +40,7 @@ public class LogicaFontePagadora {
 
 		inicializaLista(titular);
 		fontes.get(titular).add(fonte);
+		LogicaAuditoria.getInstancia().concluirTransacao();
 	}
 
 	private void inicializaLista(Titular titular) {

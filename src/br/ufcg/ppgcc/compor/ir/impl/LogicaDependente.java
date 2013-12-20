@@ -24,6 +24,7 @@ public class LogicaDependente {
 	private LogicaDependente(){}
 	
 	public void criarDependente(Titular titular, Dependente dependente) {
+		LogicaAuditoria.getInstancia().iniciarTransacao("Criação do dependente " + dependente.getNome());
 		LogicaAutenticacao.getInstancia().verificarLogin();
 
 		Validacao.obrigatorio(dependente.getNome(), "O campo nome é obrigatório");
@@ -35,6 +36,7 @@ public class LogicaDependente {
 
 		inicializaLista(titular);
 		dependentes.get(titular).add(dependente);
+		LogicaAuditoria.getInstancia().concluirTransacao();
 	}
 
 	private void inicializaLista(Titular titular) {

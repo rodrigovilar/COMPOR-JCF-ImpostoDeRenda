@@ -11,6 +11,8 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 public class LogicaDeclaracaoCompleta {
 
 	public Resultado declaracaoCompleta(Titular titular) {
+		LogicaAuditoria.getInstancia().iniciarTransacao(
+				"Relatório da Declaração completa para " + titular.getNome());
 		LogicaAutenticacao.getInstancia().verificarLogin();
 
 		List<Dependente> dependentes = 
@@ -33,6 +35,8 @@ public class LogicaDeclaracaoCompleta {
 		resultado.setImpostoDevido(impostoDevido);
 		resultado.setImpostoPago(impostoPago);
 		resultado.setImpostoAPagar(impostoDevido - impostoPago); 
+		
+		LogicaAuditoria.getInstancia().concluirTransacao();
 		return resultado;
 	}
 
