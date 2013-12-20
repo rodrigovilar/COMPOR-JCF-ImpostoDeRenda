@@ -7,6 +7,7 @@ import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.ir.fachada.NovoAuditor;
 import br.ufcg.ppgcc.compor.ir.fachada.Pessoa;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
@@ -20,7 +21,7 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 	private LogicaDependente logicaDependente = LogicaDependente.getInstancia();
 	private LogicaDeclaracaoCompleta logicaDeclaracaoCompleta = new LogicaDeclaracaoCompleta();
 	private LogicaGastoDedutivel logicaGastoDedutivel = LogicaGastoDedutivel.getInstancia();
-	private LogicaAuditoria logicaAuditoria = LogicaAuditoria.getInstancia();
+	private NovaLogicaAuditoria logicaAuditoria = NovaLogicaAuditoria.getInstancia();
 
 	public FachadaExperimentoImpl() {
 		logicaTitular.limpar();
@@ -88,6 +89,6 @@ public class FachadaExperimentoImpl implements FachadaExperimento {
 
 	@Override
 	public void setAuditor(Auditor auditor) {
-		logicaAuditoria.setAuditor(auditor);
+		logicaAuditoria.setAuditor((NovoAuditor) auditor);
 	}
 }

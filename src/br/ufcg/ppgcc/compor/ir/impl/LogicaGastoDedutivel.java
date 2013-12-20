@@ -27,7 +27,7 @@ public class LogicaGastoDedutivel {
 	}
 
 	public void criarGastoDedutivel(Pessoa realizador, GastoDedutivel gasto) {
-		LogicaAuditoria.getInstancia().iniciarTransacao("Criação do gasto " + gasto.getTipo());
+		NovaLogicaAuditoria.getInstancia().iniciarTransacao("Criação do gasto " + gasto.getTipo());
 		LogicaAutenticacao.getInstancia().verificarLogin();
 
 		Validacao.obrigatorio(gasto.getCnpjCpfReceptor(), "O campo CPF/CNPJ do receptor é obrigatório");
@@ -43,7 +43,7 @@ public class LogicaGastoDedutivel {
 		}
 
 		gastos.get(realizador).add(gasto);
-		LogicaAuditoria.getInstancia().concluirTransacao();
+		NovaLogicaAuditoria.getInstancia().concluirTransacao();
 	}
 
 	public List<GastoDedutivel> listarGastosDedutiveis(Pessoa realizador) {

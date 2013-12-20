@@ -21,14 +21,14 @@ public class LogicaTitular {
 	private LogicaTitular(){}
 	
 	public void criarNovoTitular(Titular titular) {
-		LogicaAuditoria.getInstancia().iniciarTransacao("Criação do titular " + titular.getNome());
+		NovaLogicaAuditoria.getInstancia().iniciarTransacao("Criação do titular " + titular.getNome());
 		LogicaAutenticacao.getInstancia().verificarLogin();
 		
 		Validacao.obrigatorio(titular.getNome(), "O campo nome é obrigatório");
 		Validacao.obrigatorio(titular.getCpf(), "O campo CPF é obrigatório");
 		Validacao.cpf(titular.getCpf(), "O campo CPF está inválido");
 		titulares.add(titular);
-		LogicaAuditoria.getInstancia().concluirTransacao();
+		NovaLogicaAuditoria.getInstancia().concluirTransacao();
 	}
 
 	public List<Titular> listarTitulares() {

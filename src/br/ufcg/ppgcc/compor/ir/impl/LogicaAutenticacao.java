@@ -14,7 +14,7 @@ public class LogicaAutenticacao {
 	private Map<String,String> logins = new HashMap<String, String>();
 	private String logado = null;
 	private boolean usarAutenticacao = false;
-	private LogicaAuditoria logicaAutenticacao = LogicaAuditoria.getInstancia();
+	private NovaLogicaAuditoria logicaAutenticacao = NovaLogicaAuditoria.getInstancia();
 
 
 	public static LogicaAutenticacao getInstancia() {

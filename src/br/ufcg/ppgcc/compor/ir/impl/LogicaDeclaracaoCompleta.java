@@ -11,7 +11,7 @@ import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 public class LogicaDeclaracaoCompleta {
 
 	public Resultado declaracaoCompleta(Titular titular) {
-		LogicaAuditoria.getInstancia().iniciarTransacao(
+		NovaLogicaAuditoria.getInstancia().iniciarTransacao(
 				"Relatório da Declaração completa para " + titular.getNome());
 		LogicaAutenticacao.getInstancia().verificarLogin();
 
@@ -36,7 +36,7 @@ public class LogicaDeclaracaoCompleta {
 		resultado.setImpostoPago(impostoPago);
 		resultado.setImpostoAPagar(impostoDevido - impostoPago); 
 		
-		LogicaAuditoria.getInstancia().concluirTransacao();
+		NovaLogicaAuditoria.getInstancia().concluirTransacao();
 		return resultado;
 	}
 
