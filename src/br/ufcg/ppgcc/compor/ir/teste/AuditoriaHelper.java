@@ -1,53 +1,46 @@
 package br.ufcg.ppgcc.compor.ir.teste;
 
 import static org.mockito.Mockito.verify;
-import br.ufcg.ppgcc.compor.ir.fachada.Auditor;
+import br.ufcg.ppgcc.compor.ir.fachada.NovoAuditor;
 
 public class AuditoriaHelper {
 
-	static void verificarLoginDefaultOk(Auditor auditor, Integer transacao) {
-		verify(auditor).iniciandoTransacao(transacao, null, "Login default");
-		verify(auditor).transacaoConcluida(transacao);
+	static void verificarLoginDefaultOk(NovoAuditor auditor, Integer transacao) {
+		verify(auditor).transacao(transacao, null, "Login default", "Ok");
 	}
 
-	static void verificarLoginOk(Auditor auditor, Integer transacao,
+	static void verificarLoginOk(NovoAuditor auditor, Integer transacao,
 			String usuario) {
-		verify(auditor).iniciandoTransacao(transacao, null, "Login " + usuario);
-		verify(auditor).transacaoConcluida(transacao);
+		verify(auditor).transacao(transacao, null, "Login " + usuario, "Ok");
 	}
 
-	static void verificarCriacaoUsuarioOk(Auditor auditor, Integer transacao,
+	static void verificarCriacaoUsuarioOk(NovoAuditor auditor, Integer transacao,
 			String usuarioLogado, String usuarioCriado) {
-		verify(auditor).iniciandoTransacao(transacao, usuarioLogado,
-				"Criação do usuário " + usuarioCriado);
-		verify(auditor).transacaoConcluida(transacao);
+		verify(auditor).transacao(transacao, usuarioLogado,
+				"Criação do usuário " + usuarioCriado, "Ok");
 	}
 
-	static void verificarCriacaoTitularOk(Auditor auditor, Integer transacao,
+	static void verificarCriacaoTitularOk(NovoAuditor auditor, Integer transacao,
 			String usuarioLogado, String titularCriado) {
-		verify(auditor).iniciandoTransacao(transacao, usuarioLogado,
-				"Criação do titular " + titularCriado);
-		verify(auditor).transacaoConcluida(transacao);
+		verify(auditor).transacao(transacao, usuarioLogado,
+				"Criação do titular " + titularCriado, "Ok");
 	}
 
-	static void verificarCriacaoFontePagadoraOk(Auditor auditor, Integer transacao,
+	static void verificarCriacaoFontePagadoraOk(NovoAuditor auditor, Integer transacao,
 			String usuarioLogado, String fontePagadoraCriada) {
-		verify(auditor).iniciandoTransacao(transacao, usuarioLogado,
-				"Criação da fonte pagadora " + fontePagadoraCriada);
-		verify(auditor).transacaoConcluida(transacao);
+		verify(auditor).transacao(transacao, usuarioLogado,
+				"Criação da fonte pagadora " + fontePagadoraCriada, "Ok");
 	}
 
-	static void verificarCriacaoDependenteOk(Auditor auditor, Integer transacao,
+	static void verificarCriacaoDependenteOk(NovoAuditor auditor, Integer transacao,
 			String usuarioLogado, String dependenteCriado) {
-		verify(auditor).iniciandoTransacao(transacao, usuarioLogado,
-				"Criação do dependente " + dependenteCriado);
-		verify(auditor).transacaoConcluida(transacao);
+		verify(auditor).transacao(transacao, usuarioLogado,
+				"Criação do dependente " + dependenteCriado, "Ok");
 	}
 
-	static void verificarCriacaoGastoOk(Auditor auditor, Integer transacao,
+	static void verificarCriacaoGastoOk(NovoAuditor auditor, Integer transacao,
 			String usuarioLogado, String gastoCriado) {
-		verify(auditor).iniciandoTransacao(transacao, usuarioLogado,
-				"Criação do gasto " + gastoCriado);
-		verify(auditor).transacaoConcluida(transacao);
+		verify(auditor).transacao(transacao, usuarioLogado,
+				"Criação do gasto " + gastoCriado, "Ok");
 	}
 }
