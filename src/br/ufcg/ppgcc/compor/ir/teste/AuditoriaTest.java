@@ -1,18 +1,19 @@
 package br.ufcg.ppgcc.compor.ir.teste;
 
+import static org.mockito.Mockito.verify;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.*;
-import br.ufcg.ppgcc.compor.ir.fachada.Auditor;
 import br.ufcg.ppgcc.compor.ir.fachada.Dependente;
 import br.ufcg.ppgcc.compor.ir.fachada.ExcecaoImpostoDeRenda;
 import br.ufcg.ppgcc.compor.ir.fachada.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.fachada.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.fachada.GastoDedutivel;
+import br.ufcg.ppgcc.compor.ir.fachada.NovoAuditor;
 import br.ufcg.ppgcc.compor.ir.fachada.Resultado;
 import br.ufcg.ppgcc.compor.ir.fachada.Titular;
 import br.ufcg.ppgcc.compor.ir.impl.FachadaExperimentoImpl;
@@ -22,7 +23,7 @@ public class AuditoriaTest {
 	private FachadaExperimento fachada;
 
 	@Mock
-	private Auditor auditor;
+	private NovoAuditor auditor;
 	
 	@Before
 	public void iniciar() {
@@ -45,8 +46,7 @@ public class AuditoriaTest {
 			fachada.login("admin", "admin2");
 		} catch (ExcecaoImpostoDeRenda e) {}
 
-		verify(auditor).iniciandoTransacao(1, null, "Login default");
-		verify(auditor).transacaoAbortada(1, "Senha errada");
+		verify(auditor).transacao(1, null, "Login default", "Senha errada");
 	}
 
 	@Test
@@ -55,8 +55,7 @@ public class AuditoriaTest {
 			fachada.login("admin2", "admin");
 		} catch (ExcecaoImpostoDeRenda e) {}
 
-		verify(auditor).iniciandoTransacao(1, null, "Login admin2");
-		verify(auditor).transacaoAbortada(1, "Usuário desconhecido");
+		verify(auditor).transacao(1, null, "Login admin2", "Usuário desconhecido");
 	}
 	
 	@Test
@@ -73,9 +72,8 @@ public class AuditoriaTest {
 			fachada.criarUsuario("usuario", "senha");
 		} catch (ExcecaoImpostoDeRenda e) {}
 		
-		verify(auditor).iniciandoTransacao(1, null,
-				"Criação do usuário usuario");
-		verify(auditor).transacaoAbortada(1, "Usuário não logado");
+		verify(auditor).transacao(1, null,
+				"Criação do usuário usuario", "Usuário não logado");
 	}
 
 	@Test
@@ -86,9 +84,8 @@ public class AuditoriaTest {
 		AutenticacaoHelper.adminCriarUsuarioLogar(fachada, "usuario", "senha");
 		TitularHelper.verificaCriacaoTitulares(fachada, titular1);
 		
-		verify(auditor).iniciandoTransacao(1, null,
-				"Criação do titular Jose");
-		verify(auditor).transacaoAbortada(1, "Usuário não logado");
+		verify(auditor).transacao(1, null,
+				"Criação do titular Jose", "Usuário não logado");
 		
 		AuditoriaHelper.verificarLoginDefaultOk(auditor, 2);
 		AuditoriaHelper.verificarCriacaoUsuarioOk(auditor, 3, "admin", "usuario");
@@ -107,9 +104,8 @@ public class AuditoriaTest {
 		TitularHelper.verificaCriacaoTitulares(fachada, titular1);
 		FontePagadoraHelper.verificaCriacaoFontes(fachada, titular1, fonte1);
 
-		verify(auditor).iniciandoTransacao(1, null,
-				"Criação da fonte pagadora UFCG");
-		verify(auditor).transacaoAbortada(1, "Usuário não logado");
+		verify(auditor).transacao(1, null,
+				"Criação da fonte pagadora UFCG", "Usuário não logado");
 
 		AuditoriaHelper.verificarLoginDefaultOk(auditor, 2);
 		AuditoriaHelper.verificarCriacaoUsuarioOk(auditor, 3, "admin", "usuario");
@@ -129,9 +125,8 @@ public class AuditoriaTest {
 		TitularHelper.verificaCriacaoTitulares(fachada, titular1);
 		DependenteHelper.verificaCriacaoDependentes(fachada, titular1, dependente1);
 
-		verify(auditor).iniciandoTransacao(1, null,
-				"Criação do dependente Filho 1");
-		verify(auditor).transacaoAbortada(1, "Usuário não logado");
+		verify(auditor).transacao(1, null,
+				"Criação do dependente Filho 1", "Usuário não logado");
 
 		AuditoriaHelper.verificarLoginDefaultOk(auditor, 2);
 		AuditoriaHelper.verificarCriacaoUsuarioOk(auditor, 3, "admin", "usuario");
@@ -151,9 +146,8 @@ public class AuditoriaTest {
 		TitularHelper.verificaCriacaoTitulares(fachada, titular1);
 		GastoDedutivelHelper.verificaCriacaoGastosDedutiveis(fachada, titular1, gasto1);
 
-		verify(auditor).iniciandoTransacao(1, null,
-				"Criação do gasto Educacao");
-		verify(auditor).transacaoAbortada(1, "Usuário não logado");
+		verify(auditor).transacao(1, null,
+				"Criação do gasto Educacao", "Usuário não logado");
 
 		AuditoriaHelper.verificarLoginDefaultOk(auditor, 2);
 		AuditoriaHelper.verificarCriacaoUsuarioOk(auditor, 3, "admin", "usuario");
@@ -184,9 +178,8 @@ public class AuditoriaTest {
 		Resultado completa = fachada.declaracaoCompleta(titular1);
 		Assert.assertNotNull(completa);
 		
-		verify(auditor).iniciandoTransacao(1, null,
-				"Relatório da Declaração completa para Jose");
-		verify(auditor).transacaoAbortada(1, "Usuário não logado");
+		verify(auditor).transacao(1, null,
+				"Relatório da Declaração completa para Jose", "Usuário não logado");
 
 		AuditoriaHelper.verificarLoginDefaultOk(auditor, 2);
 		AuditoriaHelper.verificarCriacaoUsuarioOk(auditor, 3, "admin", "usuario");
@@ -195,8 +188,7 @@ public class AuditoriaTest {
 		AuditoriaHelper.verificarCriacaoTitularOk(auditor, 5, "usuario", "Jose");
 		AuditoriaHelper.verificarCriacaoFontePagadoraOk(auditor, 6, "usuario", "UFCG");
 
-		verify(auditor).iniciandoTransacao(7, "usuario",
-				"Relatório da Declaração completa para Jose");
-		verify(auditor).transacaoConcluida(7);
+		verify(auditor).transacao(7, "usuario",
+				"Relatório da Declaração completa para Jose", "Ok");
 	}
 }
