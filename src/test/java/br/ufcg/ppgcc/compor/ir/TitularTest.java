@@ -33,17 +33,35 @@ public class TitularTest {
 		TitularHelper.verificaCriacaoTitulares(fachada, titular1, titular2);
 	}
 
-	@Test(expected=ExcecaoImpostoDeRenda.class)
+	@Test
 	public void T_01_04_titularSemNome() {
 		Titular titular = new Titular();
 		titular.setCpf("000.000.000-00"); 
-		fachada.criarNovoTitular(titular);
+		TitularHelper.excecaoCriarTitular(fachada, titular, "O campo nome é obrigatório");
 	}
-
-	@Test(expected=ExcecaoImpostoDeRenda.class)
-	public void declaracaoSemCpf() {
+	
+	@Test
+	public void T_01_05_titularSemCpf() {
 		Titular titular = new Titular();
 		titular.setNome("Jose");
-		fachada.criarNovoTitular(titular);
+		TitularHelper.excecaoCriarTitular(fachada, titular, "O campo CPF é obrigatório");
+	}
+	
+	@Test
+	public void T_01_06_titularComCpfInvalido() {
+		Titular titular = new Titular();
+		titular.setNome("Jose");
+		titular.setCpf("00000000000"); 
+		TitularHelper.excecaoCriarTitular(fachada, titular, "O campo CPF está inválido");
+
+		titular = new Titular();
+		titular.setNome("Jose");
+		titular.setCpf("abc"); 
+		TitularHelper.excecaoCriarTitular(fachada, titular, "O campo CPF está inválido");
+
+		titular = new Titular();
+		titular.setNome("Jose");
+		titular.setCpf("000.000.000-00a"); 
+		TitularHelper.excecaoCriarTitular(fachada, titular, "O campo CPF está inválido");
 	}
 }

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.List;
 
+import org.junit.Assert;
+
 public class TitularHelper {
 
 	static Titular criarTitularMinimo() {
@@ -50,4 +52,12 @@ public class TitularHelper {
 		
 	}
 
+	static void excecaoCriarTitular(FachadaExperimento fachada, Titular titular, String mensagem) {
+		try {
+			fachada.criarNovoTitular(titular);
+			Assert.fail("A criação de Titular deveria ter lançado exceção");
+		} catch (ExcecaoImpostoDeRenda e) {
+			Assert.assertEquals(e.getMessage(), mensagem);
+		}
+	}
 }
