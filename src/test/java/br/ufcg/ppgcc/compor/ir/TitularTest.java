@@ -33,4 +33,11 @@ public class TitularTest {
 		TitularHelper.verificaCriacaoTitulares(fachada, titular1, titular2);
 	}
 
+	@Test(expected=ExcecaoImpostoDeRenda.class)
+	public void T_01_04_titularSemNome() {
+		Titular titular = new Titular();
+		titular.setCpf("000.000.000-00"); 
+		fachada.criarNovoTitular(titular);
+	}
+
 }
