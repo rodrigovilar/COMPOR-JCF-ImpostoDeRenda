@@ -36,12 +36,18 @@ public class TitularHelper {
 		return endereco;
 	}
 
-	static void verificaCriacaoTitular(FachadaExperimento fachada, Titular titular) {
-		fachada.criarNovoTitular(titular);
-		List<Titular> titulares = fachada.listarTitulares();
+	static void verificaCriacaoTitulares(FachadaExperimento fachada, Titular... titulares) {
+		for (Titular titular : titulares) {
+			fachada.criarNovoTitular(titular);
+		}
 	
-		assertEquals(1, titulares.size());
-		assertEquals(titular, titulares.get(0));
+		List<Titular> titularesSalvos = fachada.listarTitulares();
+		assertEquals(titulares.length, titularesSalvos.size());
+		
+		for (int i = 0; i < titulares.length; i++) {
+			assertEquals(titulares[i], titularesSalvos.get(i));
+		}
+		
 	}
 
 }
