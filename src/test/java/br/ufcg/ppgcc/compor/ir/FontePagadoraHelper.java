@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.junit.Assert;
+
 public class FontePagadoraHelper {
 
 	static FontePagadora criarFontePagadora(String nome, String cpfCnpj,
@@ -37,4 +39,12 @@ public class FontePagadoraHelper {
 		
 	}
 
+	static void excecaoCriarFonte(FachadaExperimento fachada, Titular titular, FontePagadora fonte, String mensagem) {
+		try {
+			fachada.criarFontePagadora(titular, fonte);
+			Assert.fail("A criação de Fonte pagadora deveria ter lançado exceção");
+		} catch (ExcecaoImpostoDeRenda e) {
+			Assert.assertEquals(e.getMessage(), mensagem);
+		}
+	}
 }
