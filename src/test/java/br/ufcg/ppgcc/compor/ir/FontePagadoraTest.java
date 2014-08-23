@@ -21,4 +21,13 @@ public class FontePagadoraTest {
 		FontePagadoraHelper.verificaCriacaoFontes(fachada, titular, fonte);
 	}
 
+	@Test
+	public void T_02_02_duasFontesPagadorasEmUmTitular() {
+		Titular titular = TitularHelper.criarTitularPadrao();
+		fachada.criarNovoTitular(titular);
+		FontePagadora fonte1 = FontePagadoraHelper.criarFontePagadoraPadrao1();
+		FontePagadora fonte2 = FontePagadoraHelper.criarFontePagadoraPadrao2();
+		FontePagadoraHelper.verificaCriacaoFontes(fachada, titular, fonte1, fonte2);
+	}
+
 }
