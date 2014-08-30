@@ -88,5 +88,6 @@ public class DeclaracaoCompletaTest {
 		Titular titular3 = TitularHelper.criarTitularMinimo();
 		cadastrarCalcularImpostoDevido(265921.62, titular3, 300000, 500000,
 				200000);
+
 	}
 }
