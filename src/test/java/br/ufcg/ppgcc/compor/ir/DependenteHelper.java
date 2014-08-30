@@ -41,7 +41,7 @@ public class DependenteHelper {
 		
 	}
 
-	static void excecaoCriarDependentes(FachadaExperimento fachada, Titular titular, Dependente dependente, String mensagem) {
+	static void excecaoCriarDependente(FachadaExperimento fachada, Titular titular, Dependente dependente, String mensagem) {
 		try {
 			fachada.criarDependente(titular, dependente);
 			Assert.fail("A criação de dependente deveria ter lançado exceção");
