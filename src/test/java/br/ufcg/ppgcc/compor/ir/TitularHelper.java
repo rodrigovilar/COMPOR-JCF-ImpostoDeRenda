@@ -26,6 +26,16 @@ public class TitularHelper {
 		return titular;
 	}
 
+	static Titular criarTitularPadrao2() {
+		Titular titular = criarTitularMinimo();
+		titular.setDataNascimento(Calendar.getInstance());
+		titular.setTituloEleitoral("0001");
+		titular.setEndereco(criarEnderecoPadrao());
+		titular.setNaturezaOcupacao(101);
+		titular.setOcupacaoPrincipal(1001);
+		return titular;
+	}
+	
 	static Endereco criarEnderecoPadrao() {
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Log");
