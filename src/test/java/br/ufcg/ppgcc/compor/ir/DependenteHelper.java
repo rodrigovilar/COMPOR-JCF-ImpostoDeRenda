@@ -17,6 +17,14 @@ public class DependenteHelper {
 		return criarDependente("111.111.111-11", Calendar.getInstance(), "Filho 2", 21);
 	}
 
+	static Dependente criarDependentePadrao3() {
+		return criarDependente("222.222.222-22", Calendar.getInstance(), "Filho 3", 21);
+	}
+
+	static Dependente criarDependentePadrao4() {
+		return criarDependente("333.333.333-33", Calendar.getInstance(), "Filho 4", 21);
+	}
+	
 	static Dependente criarDependente(String cpf, Calendar dataNascimento,
 			String nome, int tipo) {
 		Dependente dependente = new Dependente();

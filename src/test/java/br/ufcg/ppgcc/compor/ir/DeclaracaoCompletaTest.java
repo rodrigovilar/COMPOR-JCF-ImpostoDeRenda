@@ -78,12 +78,83 @@ public class DeclaracaoCompletaTest {
 	}
 	
 	@Test
-	public void T_04_06_calculoImpostoComDependente() {
+	public void T_04_06_calculoImpostoIsentoComDependente() {
+		Titular titular1 = TitularHelper.criarTitularPadrao();
+		Dependente dependente1 = DependenteHelper.criarDependentePadrao1();
+		cadastrarCalcularImpostoDevido(0, titular1, 1000, dependente1);
+
+		Titular titular2 = TitularHelper.criarTitularPadrao2();
+		Dependente dependente2 = DependenteHelper.criarDependentePadrao2();
+		cadastrarCalcularImpostoDevido(0, titular2, 15000, dependente2);
+
+		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Dependente dependente3 = DependenteHelper.criarDependentePadrao3();
+		Dependente dependente4 = DependenteHelper.criarDependentePadrao4();
+		cadastrarCalcularImpostoDevido(0, titular3, 19000, dependente3, dependente4);
+	}
+
+	@Test
+	public void T_04_07_calculoImpostoFaixa2ComDependente() {
+		Titular titular1 = TitularHelper.criarTitularPadrao();
+		Dependente dependente1 = DependenteHelper.criarDependentePadrao1();
+		cadastrarCalcularImpostoDevido(0, titular1, 20000, dependente1);
+
+		Titular titular2 = TitularHelper.criarTitularPadrao2();
+		Dependente dependente2 = DependenteHelper.criarDependentePadrao2();
+		cadastrarCalcularImpostoDevido(253.49, titular2, 25000, dependente2);
+
+		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Dependente dependente3 = DependenteHelper.criarDependentePadrao3();
+		Dependente dependente4 = DependenteHelper.criarDependentePadrao4();
+		cadastrarCalcularImpostoDevido(405.39, titular3, 29000, dependente3, dependente4);
+	}
+
+	@Test
+	public void T_04_08_calculoImpostoFaixa3ComDependente() {
+		Titular titular1 = TitularHelper.criarTitularPadrao();
+		Dependente dependente1 = DependenteHelper.criarDependentePadrao1();
+		cadastrarCalcularImpostoDevido(628.49, titular1, 30000, dependente1);
+
+		Titular titular2 = TitularHelper.criarTitularPadrao2();
+		Dependente dependente2 = DependenteHelper.criarDependentePadrao2();
+		cadastrarCalcularImpostoDevido(1272.24, titular2, 35000, dependente2);
+
+		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Dependente dependente3 = DependenteHelper.criarDependentePadrao3();
+		Dependente dependente4 = DependenteHelper.criarDependentePadrao4();
+		cadastrarCalcularImpostoDevido(1576.03, titular3, 39000, dependente3, dependente4);		
+	}
+	
+	@Test
+	public void T_04_09_calculoImpostoFaixa4ComDependente() {
+		Titular titular1 = TitularHelper.criarTitularPadrao();
+		Dependente dependente1 = DependenteHelper.criarDependentePadrao1();
+		cadastrarCalcularImpostoDevido(2022.24, titular1, 40000, dependente1);
+
+		Titular titular2 = TitularHelper.criarTitularPadrao2();
+		Dependente dependente2 = DependenteHelper.criarDependentePadrao2();
+		cadastrarCalcularImpostoDevido(3054.89, titular2, 45000, dependente2);
+
+		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Dependente dependente3 = DependenteHelper.criarDependentePadrao3();
+		Dependente dependente4 = DependenteHelper.criarDependentePadrao4();
+		cadastrarCalcularImpostoDevido(3510.58, titular3, 49000, dependente3, dependente4);		
+	}
+
+	@Test
+	public void T_04_10_calculoImpostoFaixa5ComDependente() {
 		Titular titular1 = TitularHelper.criarTitularPadrao();
 		Dependente dependente1 = DependenteHelper.criarDependentePadrao1();
 		cadastrarCalcularImpostoDevido(4404.89, titular1, 51000, dependente1);
-		
-		//TODO calcular com todas as faixas e com vários dependentes
+
+		Titular titular2 = TitularHelper.criarTitularPadrao2();
+		Dependente dependente2 = DependenteHelper.criarDependentePadrao2();
+		cadastrarCalcularImpostoDevido(17878.57, titular2, 100000, dependente2);
+
+		Titular titular3 = TitularHelper.criarTitularMinimo();
+		Dependente dependente3 = DependenteHelper.criarDependentePadrao3();
+		Dependente dependente4 = DependenteHelper.criarDependentePadrao4();
+		cadastrarCalcularImpostoDevido(264835.52, titular3, 1000000, dependente3, dependente4);		
 	}
 
 	private void cadastrarCalcularImpostoDevido(double impostoDevido,
