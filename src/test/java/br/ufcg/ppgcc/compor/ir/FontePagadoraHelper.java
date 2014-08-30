@@ -8,6 +8,10 @@ import org.junit.Assert;
 
 public class FontePagadoraHelper {
 
+	static FontePagadora criarFontePagadoraPorRenda(int renda) {
+		return criarFontePagadora("UFCG", "00.000.000/0000-00", renda);
+	}
+	
 	static FontePagadora criarFontePagadora(String nome, String cpfCnpj,
 			double rendimentoRecebidos) {
 		FontePagadora fonte = new FontePagadora();
