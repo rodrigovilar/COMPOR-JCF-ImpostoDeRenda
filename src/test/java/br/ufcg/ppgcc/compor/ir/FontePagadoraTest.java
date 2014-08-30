@@ -67,4 +67,21 @@ public class FontePagadoraTest {
 				"O campo rendimentos recebidos deve ser maior que zero");
 	}
 
+	@Test
+	public void T_02_05_novaFonteComCnpjInvalido() {
+		Titular titular = TitularHelper.criarTitularPadrao();
+		FontePagadora fonte = FontePagadoraHelper.criarFontePagadora("UFCG",
+				"0000000000000000", 50000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
+				"O campo CPF/CNPJ é inválido");
+
+		fonte = FontePagadoraHelper.criarFontePagadora("UFCG", "abcd", 50000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
+				"O campo CPF/CNPJ é inválido");
+
+		fonte = FontePagadoraHelper.criarFontePagadora("UFCG",
+				"00.000.000/0000-00a", 50000);
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
+				"O campo CPF/CNPJ é inválido");
+	}
 }
